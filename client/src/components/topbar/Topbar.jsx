@@ -13,7 +13,7 @@ export default function Topbar() {
       <div className="topbarCenter">
         <div className="searchbar">
           <SearchIcon/>
-          <input type="text "placeholder="Search for friends, posts, and videos" className="searchInput" />
+          <input placeholder="Search for friends, posts, and videos" className="searchInput" />
         </div>
       </div>
       <div className="topbarRight">
