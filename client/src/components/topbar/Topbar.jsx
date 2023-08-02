@@ -3,12 +3,16 @@ import SearchIcon from "@mui/icons-material/Search"
 import Person from "@mui/icons-material/Person"
 import Chat from "@mui/icons-material/Chat"
 import Notifications from "@mui/icons-material/Notifications"
+import { Link } from "react-router-dom"
 
 export default function Topbar() {
   return (
     <div className='topbarContainer'>
       <div className="topbarLeft">
-        <span className="logo">UserLink</span>
+        {/* Link to head back to the Homepage based off the user's decision */}
+        <Link to="/" style={{textDecoration:"none"}}>
+          <span className="logo">UserLink</span>
+        </Link>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
