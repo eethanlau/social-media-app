@@ -4,8 +4,14 @@ import Person from "@mui/icons-material/Person"
 import Chat from "@mui/icons-material/Chat"
 import Notifications from "@mui/icons-material/Notifications"
 import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
+
+  const { user } = useContext(AuthContext);
+  //Include the place where the assets are stored
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className='topbarContainer'>
       <div className="topbarLeft">
