@@ -15,7 +15,7 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
 
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   return (
     // Create routes for each page's components
     <Router>
@@ -25,7 +25,7 @@ function App() {
         {/* Login Page Route */}
         <Route path="/login" element={user ? <Navigate replace to="/"/> : <Login/>}/>
         {/* Register Page Route */}
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/register" element={user ? <Navigate replace to="/"/> : <Register/>}/>
         {/* Profile Page Route */}
         <Route path="/profile/:username" element={<Profile/>}/>
       </Routes>

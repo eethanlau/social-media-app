@@ -1,10 +1,11 @@
 import "./post.css"
 import MoreVert from "@mui/icons-material/MoreVert"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 //Used to format the creation date for a post made by a user
 import { format } from "timeago.js"
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 //Pass in prop for post in order to access the properties of each individual post
 export default function Post({ post }) {
@@ -14,6 +15,12 @@ export default function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  //Destructure user from AuthContext and give it a new alias
+  const { user: currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(currentUser._id))
+  }, [currentUser._id, post.likes])
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,11 +34,21 @@ export default function Post({ post }) {
     }
     fetchUser();
   }, [post?.userId])
-
+  
+  //Handle likes and unlikes accordingly
   const likeHandler = () => {
+    try {
+      axios.put("/posts/" + post._id + "/like", {userId: currentUser._id})
+      .then((res) => 
+        console.log(res.data))
+      .catch(err => 
+        console.log(err)
+      );
+    } catch (err) {}
     setLike(isLiked ? like - 1: like + 1);
-    setIsLiked(!isLiked)
+    setIsLiked(!isLiked);
   }
+  
   return (
     <div className="post">
       <div className="postWrapper">

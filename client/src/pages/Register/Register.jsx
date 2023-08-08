@@ -8,6 +8,7 @@ export default function Register() {
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
+  //Allow the user to be redirected to previous pages accordingly
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
