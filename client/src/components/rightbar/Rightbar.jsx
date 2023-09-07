@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/AuthContext";
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
+import Edit from "@mui/icons-material/Edit";
 
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -72,6 +73,15 @@ export default function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
+      {user.username == currentUser.username && (
+        // Link this button to the edit form accordingly
+        <Link to={"/profile/" + user.username + "/edit"} style={{textDecoration:"none"}}>
+        <button className="rightbarFollowButton">
+          Edit        <Edit/>
+        </button>
+        </Link>
+        // Create a link to delete users as accordingly as well
+      )} 
       {user.username !== currentUser.username && (
         <button className="rightbarFollowButton" onClick={handleClick}>
           {followed ? "Unfollow" : "Follow"}
@@ -90,7 +100,7 @@ export default function Rightbar({ user }) {
           </div>
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">{user.relationship === 1 ? "Single" : user.relationship === 1 ? "Married" : "-"}</span>
+            <span className="rightbarInfoValue">{user.relationship}</span>
           </div>
         </div>
         <h4 className="rightbarTitle">This User's Friends:</h4>

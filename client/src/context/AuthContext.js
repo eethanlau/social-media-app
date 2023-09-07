@@ -1,28 +1,24 @@
 import { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer";
 
+//Initial state for when the user is logged in
 const INITIAL_STATE = {
-  user: {
-    _id: "64c17f80893bb3721eb07068",
-    username: "john",
-    email: "john@gmail.com",
-    profilePicture: "",
-    coverPicture: "",
-    followers: ["64cb1ac0574eac2bf7847f02"],
-    followings: ["64cb1ac0574eac2bf7847f02"],
-    isAdmin: false,
-    from: "New York",
-    desc: "I'm the GOAT"
-  },
+  user:JSON.parse(localStorage.getItem("user")) || null,
   isFetching: false,
-  error: false
-};
+  error: false,
+}
+
+//
 
 export const AuthContext = createContext(INITIAL_STATE);
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(state.user))
+  }, [state.user])
+  
   return ( 
     <AuthContext.Provider
      value ={{

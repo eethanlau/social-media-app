@@ -6,6 +6,8 @@ import axios from "axios";
 import { format } from "timeago.js"
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Dropdown from 'react-bootstrap/Dropdown';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Pass in prop for post in order to access the properties of each individual post
 export default function Post({ post }) {
@@ -48,8 +50,14 @@ export default function Post({ post }) {
     setLike(isLiked ? like - 1: like + 1);
     setIsLiked(!isLiked);
   }
+
+  //Handle the drop-down menu to edit and delete posts for users when logged in accordingly
+  // const handleVert = () => {
+
+  // }
   
   return (
+    // If the post is that of the user that is logged in, display a button that allows the user to edit the post
     <div className="post">
       <div className="postWrapper">
         {/* Organize post layout accordingly */}
@@ -61,9 +69,19 @@ export default function Post({ post }) {
             <span className="postUsername">{user?.username}</span>
             <span className="postDate">{format(post?.createdAt)}</span>
           </div>
-          <div className="postTopRight">
-            <MoreVert/>
-          </div>
+          {/* Add functionality for a button here in order to edit the post */}
+          {/* Only allow a user to access such buttosns if this post is made by them accordingly */}
+          {currentUser._id === post.userId ? <div className="postTopRight">
+            <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic" size="sm">
+            Options
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item><Link to={`/post/${user.username}/${post._id}/edit`} style={{ textDecoration: "none" , textAlign: "center"}}>Edit Post Information</Link></Dropdown.Item>
+              <Dropdown.Item><Link to={`/post/${user.username}/${post._id}/delete`} style={{ textDecoration: "none" , textAlign: "center"}}>Delete Post</Link></Dropdown.Item>
+            </Dropdown.Menu>
+            </Dropdown>
+            </div> : null}
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>

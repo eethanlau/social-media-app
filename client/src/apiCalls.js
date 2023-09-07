@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Login credentials
 export const loginCall = async (userCredential, dispatch) => {
   dispatch({type: "LOGIN_START"});
   try {
@@ -8,4 +9,10 @@ export const loginCall = async (userCredential, dispatch) => {
   } catch(err) {
     dispatch({type:"LOGIN_FAILURE", payload: err });
   }
+}
+
+// Allow functionality to make log out possible
+export const logout = async (dispatch) => {
+  dispatch({type: "LOGOUT"});
+  
 }

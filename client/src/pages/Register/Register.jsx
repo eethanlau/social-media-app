@@ -2,6 +2,8 @@ import "./register.css"
 import { useRef } from "react";
 import { useNavigate } from "react-router"
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { textAlign } from "@mui/system";
 
 export default function Register() {
   const username = useRef();
@@ -50,9 +52,11 @@ export default function Register() {
           <input placeholder="Password" required ref={password} className="loginInput" type="password" minLength="6"/>
           <input placeholder="Confirm Password" required ref={passwordAgain} className="loginInput" type="password"/>
           <button className="loginButton" type="submit">Sign Up</button>
+          <Link to="/login">
           <button className="loginRegisterButton">
               Sign In
             </button>
+            </Link>
           </form>
         </div>
       </div>
