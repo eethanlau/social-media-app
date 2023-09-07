@@ -24,7 +24,6 @@ export default function EditPost({ post }) {
     const post = {
       userId : userId,
       desc: desc.current.value,
-
     }
     console.log(postId);
     //Utilize axios to make a request to the API to push in the edited information for the post accordingly
